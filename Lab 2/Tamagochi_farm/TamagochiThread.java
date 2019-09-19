@@ -6,8 +6,8 @@ public class TamagochiThread extends Thread{
         void interrupted();
     }
 
-    static int tamagotchiCount = -1;
-    private int tamagotchiId;
+    static int tamagochiCount = -1;
+    private int tamagochiId;
     private int foodAmount;
     private int maxFood;
     private TamagochiReporterInterface callbackInterface = null;
@@ -16,26 +16,30 @@ public class TamagochiThread extends Thread{
         callbackInterface = callback;
         this.foodAmount = startFood;
         this.maxFood = maxFood;
-        tamagotchiCount++;
-        tamagotchiId = tamagotchiCount;
+        tamagochiCount++;
+        tamagochiId = tamagochiCount;
     }
 
     public void run(){
         try{    
             while(foodAmount >= 0 && foodAmount <= maxFood){
-                callbackInterface.eat(tamagotchiId, foodAmount);
+                callbackInterface.eat(tamagochiId, foodAmount);
                 foodAmount--;
-                sleep(500);
+                sleep(1000);
             }
         }catch(Exception e){
             e.printStackTrace();
             callbackInterface.interrupted();
         }
-        callbackInterface.died(tamagotchiId);
+        callbackInterface.died(tamagochiId);
     }
 
-    public void feed(){
+    public void feed(int feedingAmount){
+        foodAmount+=feedingAmount;
+    }
 
+    public int getTamagochiId(){
+        return this.tamagochiId;
     }
 
 }

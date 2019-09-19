@@ -6,10 +6,12 @@ class TamagochiFarm implements TamagochiThread.TamagochiReporterInterface{
    
     public final static int startFood = 10;
     public final static int maxFood = 20;
+    public final static int feedingAmount = 10;
     public final int tamagochis = 7;
     private boolean gameOver = false;
     private ArrayList<TamagochiThread> tamagochiThreads = new ArrayList<TamagochiThread>();
-    //Maybe implement ArrayList for tamagochi states?
+    private ArrayList<Tamagochi> tamagochiList = new ArrayList<Tamagochi>();
+    final String manyNewlines = "\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------\n-----------------------------";
     public static void main(String args[]){
         TamagochiFarm game = new TamagochiFarm();
         game.wakeTamagochis(startFood, maxFood, game);
@@ -22,9 +24,10 @@ class TamagochiFarm implements TamagochiThread.TamagochiReporterInterface{
         System.out.println(tamagochis+" Tamagochis wake up and are hungry. Feed them as quickly as you can!");
         
         for(int i = 0; i <tamagochis; i++){
-            TamagochiThread tamagochi = new TamagochiThread(startFood, maxFood, callback);
-            tamagochiThreads.add(tamagochi);
-                
+            TamagochiThread tamagochiThread = new TamagochiThread(startFood, maxFood, callback);
+            tamagochiThreads.add(tamagochiThread);
+            Tamagochi tamagochi = new Tamagochi(startFood, tamagochiThread.getTamagochiId());
+            tamagochiList.add(tamagochi);
         }
     }
 
@@ -43,22 +46,38 @@ class TamagochiFarm implements TamagochiThread.TamagochiReporterInterface{
         while(!gameOver){
             
             command = scanner.next();
+            int i = scanner.nextInt();
             if(command.equals("feed")){
-                System.out.println("feeding");
+                tamagochiThreads.get(i).feed(feedingAmount);
+                System.out.println("feeding tamagochi no. "+i);
             }
         }
     }
 
     public void eat(int tamagochiId, int foodAmount){
-        System.out.print("\r");
-        System.out.print("Tamagochi no. "+tamagochiId+" ate "+foodAmount+" food left.");
+        tamagochiList.get(tamagochiId).setFood(foodAmount);
+        printTamagochis();
+
     }
 
     public void died(int tamagochiId){
-        System.out.println("Tamagochi no. "+tamagochiId+" died");
+        tamagochiList.get(tamagochiId).kill();
+        printTamagochis();
     }
 
     public void interrupted(){
 
+    }
+
+    public void printTamagochis(){
+        System.out.println(manyNewlines);
+        
+        String status;
+        for(int i = 0; i < tamagochiList.size(); i++){
+            Tamagochi currentTamagochi = tamagochiList.get(i);
+            if(currentTamagochi.isAlive()) { status = "alive"; }
+            else{ status = "dead"; }
+            System.out.println("Tamagochi no. "+currentTamagochi.getTamagochiId()+" is "+status+" and has "+currentTamagochi.getFoodAmount()+" food left.");
+        }
     }
 }
