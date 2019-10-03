@@ -1,3 +1,6 @@
+
+
+import java.util.concurrent.ThreadLocalRandom;
 public class TamagochiThread extends Thread{
 
     public interface TamagochiReporterInterface{
@@ -7,6 +10,7 @@ public class TamagochiThread extends Thread{
     }
 
     static int tamagochiCount = -1;
+    static int tamagochisAwake = 0;
     private int tamagochiId;
     private int foodAmount;
     private int maxFood;
@@ -21,6 +25,16 @@ public class TamagochiThread extends Thread{
     }
 
     public void run(){
+
+        try {
+            int randomTime = ThreadLocalRandom.current().nextInt(1, 3000);
+            java.lang.Thread.sleep(randomTime);
+            tamagochisAwake++;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         try{    
             while(foodAmount >= 0 && foodAmount <= maxFood){
                 callbackInterface.eat(tamagochiId, foodAmount);
