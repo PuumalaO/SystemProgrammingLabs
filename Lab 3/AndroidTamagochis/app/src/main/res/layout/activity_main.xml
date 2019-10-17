@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.example.oskari.androidtamagochis.TamagochiView
+        android:id="@+id/tamagochi1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="test"
+        app:name="Tamagochi 1"
+        app:food="2"
+        />
+
+    <com.example.oskari.androidtamagochis.TamagochiView
+        android:id="@+id/tamagochi2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="test"
+        app:name="Tamagochi 2"
+        app:food="2"
+        />
+
+    <com.example.oskari.androidtamagochis.TamagochiView
+        android:id="@+id/tamagochi3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="test"
+        app:name="Tamagochi 3"
+        app:food="2"
+        />
+
+    <com.example.oskari.androidtamagochis.TamagochiView
+        android:id="@+id/tamagochi4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="test"
+        app:name="Tamagochi 4"
+        app:food="2"
+        />
+
+    <com.example.oskari.androidtamagochis.TamagochiView
+        android:id="@+id/tamagochi5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="test"
+        app:name="Tamagochi 5"
+        app:food="2"
+        />
+
+</LinearLayout>

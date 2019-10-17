@@ -13,7 +13,7 @@ public class PrinterThread extends Thread{
     public void run(){
         try{    
             while(true){
-                sleep(1000);
+                sleep(100);
                 callbackInterface.printTamagochis();
             }
         }catch(Exception e){

@@ -1,0 +1,26 @@
+package com.example.oskari.androidtamagochis;
+
+public class PrinterThread extends Thread{
+
+    public interface PrinterInterface{
+        void printTamagochis();
+    }
+
+    private PrinterInterface callbackInterface = null;
+
+    public PrinterThread(PrinterInterface callback){
+        callbackInterface = callback;
+    }
+
+    public void run(){
+        try{    
+            while(true){
+                sleep(100);
+                callbackInterface.printTamagochis();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+}
